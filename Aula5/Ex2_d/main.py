@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import copy
 
 import cv2
 import argparse
@@ -31,13 +32,29 @@ def main():
 
     mins = np.array([ranges['b']['min'], ranges['g']['min'], ranges['r']['min']])
     maxs = np.array([ranges['b']['max'], ranges['g']['max'], ranges['r']['max']])
-    image_processed = cv2.inRange(image_rgb, mins, maxs)
+    # image_processed = cv2.inRange(image_rgb, mins, maxs)
+    mask = cv2.inRange(image_rgb, mins, maxs)
+
+    # Convert from uint8 to boolean using numpy
+
+    mask = mask.astype(np.bool)
+
+
+
+    image_processed = copy.deepcopy(image_rgb)
+    # image_processed[np.logical_not(mask)] =
+    image_processed[mask] = (image_processed[mask]*0.4).astype(np.uint8)
+
+    print(image_rgb.dtype)
+    print(mask.dtype)
+    print(image_processed.dtype)
 
 
     # Visualization
     cv2.namedWindow('original', cv2.WINDOW_AUTOSIZE)
     cv2.imshow('original', image_rgb)  # Display the image
-    cv2.imshow('image_processed' , image_processed)  # Display the image
+ #   cv2.imshow('image_processed', image_processed)  # Display the image
+    cv2.imshow('mask' , mask.astype(np.uint8)*255)  # Display the image
 
     cv2.waitKey(0)  # wait for a key press before proceding
 
