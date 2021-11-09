@@ -1,3 +1,7 @@
 # PSR_repo
 
-Teste
+# Pendencias:
+
+# Aula 6
+
+
