@@ -1,27 +1,52 @@
-import tkinter as tk
+#!/usr/bin/python3
 
-class Paint():
-    def __init__(self):
-        self.window = tk.Tk()
-        self.sizex = 500
-        self.sizey = 500
-        self.canvas = tk.Canvas(self.window, width=self.sizex,
-                             height=self.sizey, highlightthickness=0)
-        # Set canvas background color so you can see it
-        self.canvas.config(bg="thistle")
-        self.canvas.pack()
+import cv2
+import numpy as np
 
-        self.img = tk.PhotoImage(width=self.sizex, height=self.sizey)
-        self.canvas.create_image((0,0), image=self.img, state="normal",
-                                 anchor='nw')
-        # Set image color so you can see it
-        self.img.put('khaki',to=(0, 0, self.sizex, self.sizey))
-        self.canvas.bind("<Button-1>",self.color_in)
 
-    def color_in(self, event):
-        # Paint a 2x2 square at the mouse position on image
-        x, y = event.x, event.y
-        self.img.put("black", to=(x-2, y-2, x+2, y+2))
+click = False
 
-paint = Paint()
-paint.window.mainloop()
+def onMouse(cursor, xposition, yposition, flags, param):
+
+    global click
+    if cursor == cv2.EVENT_LBUTTONDOWN:
+        click = True
+     #   param[yposition, xposition] = color
+        cv2.circle(param, (xposition, yposition), 10, color, -1)
+
+    elif cursor == cv2.EVENT_MOUSEMOVE and click == True:
+        # param[yposition, xposition] = color
+         cv2.circle(param, (xposition, yposition), 10, color, -1)
+
+    elif cursor == cv2.EVENT_LBUTTONUP:
+        click = False
+
+
+def main():
+
+    whiteboard = np.ones((800, 800, 3),np.uint8)*255
+    window_name = 'Pynting'
+
+    global color
+    color = (0, 0, 0)  # set black as default
+
+    while True:
+        cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
+        cv2.imshow(window_name, whiteboard)
+
+        key = cv2.waitKey(10)
+
+        if key == ord('r'):
+            color = (0, 0, 255)
+        elif key == ord('g'):
+            color = (0, 255, 0)
+        elif key == ord('b'):
+            color = (255, 0, 0)
+        elif key == ord('q'):
+            break
+
+        cv2.setMouseCallback(window_name, onMouse, param=whiteboard)
+
+
+if __name__ == "__main__":
+    main()

@@ -27,7 +27,7 @@ def main():
     parser.add_argument('-i', '--image', type=str, required=True,help='Full path to image file.')
     args = vars(parser.parse_args())
 
-    # Load an image
+    # Load the image
     image = cv2.imread(args['image'], cv2.IMREAD_COLOR)
 
     # Converting image to grayscale

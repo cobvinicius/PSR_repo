@@ -2,6 +2,5 @@
 
 # Pendencias:
 
-# Aula 6
-
-
+# Aula 5 - 3d
+# Aula 6 - 3

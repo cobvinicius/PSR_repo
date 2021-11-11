@@ -1,8 +1,15 @@
 #!/usr/bin/python3
 
 import cv2
+import os
+
+# https://techvidvan.com/tutorials/face-recognition-project-python-opencv/
 
 def main():
+
+    # Initialize the classifier:
+    faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+
     # initial setup
     capture = cv2.VideoCapture(0)
     window_name = 'Detetar imagem'
