@@ -7,6 +7,9 @@ def main():
     capture = cv2.VideoCapture(0)
     window_name = 'Detetar imagem'
 
+    # Using a video instead
+    # capture = cv2.VideoCapture('test.mp4') # need to be in the same directory
+
     while (True):
 
         # Capture the video frame

@@ -13,14 +13,18 @@ def main():
 
     # initial setup
     capture = cv2.VideoCapture(0)
-    window_name = 'Detetar imagem'
+    window_name = 'Detetar faces e arestas'
 
     while True:
 
         # Capture the video frame
         ret, frame = capture.read()
 
+        # Grayscaling image
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+        # Blur the image for better edge detection
+        img_blur = cv2.GaussianBlur(gray, (3, 3), 0)
 
         # Display the resulting frame
      #   cv2.imshow(window_name, frame)
@@ -28,7 +32,7 @@ def main():
         height,width,_ = frame.shape
         image_gui = copy.deepcopy(frame)
 
-        # Face detection #
+        ############## Face detection ############
 
         # Convert to grayscale
         image_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -40,7 +44,7 @@ def main():
         for (x, y, w, h) in faces:
             cv2.rectangle(image_gui, (x, y), (x + w, y + h), (255, 0, 0), 2)
 
-            mask_face = np.ndarray((height,width), dtype=np.uint8) # create a mask same size as image
+            mask_face = np.ndarray((height,width), dtype=np.uint8) # create a maske same size as image
             mask_face.fill(0) # set image to all zeros
             mask_face = cv2.rectangle(mask_face, (x, y), (x+w, y+h), 255, -1) # draw blue rectangle around face
 
@@ -48,8 +52,14 @@ def main():
 
             cv2.add(frame, (-10, 50, -10, 0), dst = image_gui, mask = mask_face) # paint face color green
 
+        # Canny Edge Detection
+        edges = cv2.Canny(image=img_blur, threshold1=100, threshold2=200)
+        image_gui[edges.astype(bool)] = (0,0,255)
+
+
         # Display
-        cv2.imshow(window_name, image_gui)
+        cv2.imshow(window_name, edges)
+       # cv2.imshow(window_name, image_gui)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
