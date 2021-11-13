@@ -2,5 +2,6 @@
 
 # Pendencias:
 
-# Aula 5 - 3d
 # Aula 6 - 3
+# Trabalho
+# Tutoriais ROS

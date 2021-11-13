@@ -30,7 +30,7 @@ def main():
     # Draw a circle
     cv2.circle(image, (X, Y), 50, (255, 0, 0), 1)
 
-    # Write a sentence (1 - b)
+    # Write something (1 - b)
     text = 'PSR'
     cv2.putText(image, text, (500, 100), cv2.FONT_HERSHEY_SIMPLEX, 2, (0,0,255), 2, cv2.LINE_AA, False)  # image, text, org, font, fontScale, color, thickness, cv2.LINE_AA, True
 

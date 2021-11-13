@@ -38,28 +38,30 @@ def main():
         image_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
         # Detect the faces
-        faces = faceCascade.detectMultiScale(image_gray, 1.1, 4)
-
-        # Draw the rectangle around each face
-        for (x, y, w, h) in faces:
-            cv2.rectangle(image_gui, (x, y), (x + w, y + h), (255, 0, 0), 2)
-
-            mask_face = np.ndarray((height,width), dtype=np.uint8) # create a maske same size as image
-            mask_face.fill(0) # set image to all zeros
-            mask_face = cv2.rectangle(mask_face, (x, y), (x+w, y+h), 255, -1) # draw blue rectangle around face
-
-            ##image_gui[mask_face.astype(bool)] = (255,255,0)
-
-            cv2.add(frame, (-10, 50, -10, 0), dst = image_gui, mask = mask_face) # paint face color green
+        faces = faceCascade.detectMultiScale(img_blur, 1.1, 4)
 
         # Canny Edge Detection
         edges = cv2.Canny(image=img_blur, threshold1=100, threshold2=200)
-        image_gui[edges.astype(bool)] = (0,0,255)
+        edges_mask = edges.astype(bool)
+
+        # Draw the rectangle around each face
+        for (x, y, w, h) in faces:
+            cv2.rectangle(image_gui, (x, y), (x + w, y + h), (255, 0, 0), 2) # draw a blue rectangle where a face is detected
+
+            mask_face = np.ndarray((height,width), dtype=np.uint8) # create a mask same size as image
+            mask_face.fill(0) # set image to all zeros
+            mask_face = cv2.rectangle(mask_face, (x, y), (x+w, y+h), 255, -1)  # fill the blue rectangle
+
+            edges_mask[y:y + h, x:x + w] = False   # do not detect edges on face
+
+            cv2.add(frame, (-10, 50, -10, 0), dst = image_gui, mask = mask_face) # paint face color transparent green
+
+        image_gui[edges_mask] = (0,0,255)
 
 
         # Display
-        cv2.imshow(window_name, edges)
-       # cv2.imshow(window_name, image_gui)
+       # cv2.imshow(window_name, edges)
+        cv2.imshow(window_name, image_gui)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
