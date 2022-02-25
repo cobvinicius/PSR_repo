@@ -1,0 +1,33 @@
+<launch>
+    <param name="/highlight_text_color" value="YELLOW" />
+
+<!-- Publishers -->
+    <node name="publisherA" pkg="parte09" type="publisher.py" output="screen">
+        <remap from="topic" to="dog1"/>
+        <param name="frequency" value="1" />
+    </node>
+
+    <node name="publisherB" pkg="parte09" type="publisher.py" output="screen">
+        <remap from="topic" to="dog1"/>
+        <param name="frequency" value="3" />
+    </node>
+
+    <node name="publisherC" pkg="parte09" type="publisher.py" output="screen">
+        <remap from="topic" to="dog2"/>
+        <param name="frequency" value="10" />
+    </node>
+
+<!-- Subscribers -->
+    <node name="subscriberAB1" pkg="parte09" type="subscriber.py" output="screen">
+        <remap from="topic" to="dog1"/>
+    </node>
+
+    <node name="subscriberAB2" pkg="parte09" type="subscriber.py" output="screen">
+        <remap from="topic" to="dog1"/>
+    </node>
+
+    <node name="subscriberC" pkg="parte09" type="subscriber.py" output="screen">
+        <remap from="topic" to="dog2"/>
+    </node>
+
+</launch>

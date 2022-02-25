@@ -1,0 +1,8 @@
+<launch>
+    <!-- Launch bag file-->
+    <node pkg="rviz" type="rviz" name="rviz" args="=-d $(find psr_aula10)/EX7.rviz"/>
+
+    <!-- Launch markers -->
+    <node pkg="psr_aula10" type="Ex7.py" name="marker" output="screen"/>
+
+</launch>

@@ -1,0 +1,16 @@
+/home/vinicius/catkin_ws/src/Parte_12/Ex3_9
+
+source ~/.bashrc
+
+roslaunch p_vbatista_bringup gazebo.launch
+
+roslaunch p_vbatista_bringup bringup.launch
+
+rosrun p_vbatista_bringup turtlebot3_teleop_key.py
+
+rosrun p_vbatista_player driver.py
+
+
+
+
+roslaunch p_vbatista_bringup bringup.launch player_name:=?????? player_color:=?????? visualize:=true or false

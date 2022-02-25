@@ -1,0 +1,84 @@
+<launch>
+
+<!-- Sun to mercury -->
+    <node pkg="psr_parte11" type="Solar_System.py" name="sun_to_mercury" output="screen">
+        <remap from="parent" to="Sun"/>
+        <remap from="child" to="Mercury"/>
+        <param name="distance_to_parent" value="0.387" />
+        <param name="period" value="0.241"/>
+    </node>
+
+<!-- Sun to venus -->
+    <node pkg="psr_parte11" type="Solar_System.py" name="sun_to_venus" output="screen">
+        <remap from="parent" to="Sun"/>
+        <remap from="child" to="Venus"/>
+        <param name="distance_to_parent" value="0.723" />
+        <param name="period" value="0.651" />
+    </node>
+
+<!-- Sun to Earth -->
+    <node pkg="psr_parte11" type="Solar_System.py" name="sun_to_earth" output="screen">
+        <remap from="parent" to="Sun"/>
+        <remap from="child" to="Earth"/>
+        <param name="distance_to_parent" value="1" />
+        <param name="period" value="1" />
+    </node>
+
+<!-- Earth to Moon -->
+    <node pkg="psr_parte11" type="Solar_System.py" name="earth_to_moon" output="screen">
+        <remap from="parent" to="Earth"/>
+        <remap from="child" to="Moon"/>
+        <param name="distance_to_parent" value="0.2" />
+        <param name="period" value="0.7" />
+    </node>
+
+
+<!-- Sun to Mars -->
+    <node pkg="psr_parte11" type="Solar_System.py" name="sun_to_mars" output="screen">
+        <remap from="parent" to="Sun"/>
+        <remap from="child" to="Mars"/>
+        <param name="distance_to_parent" value="1.52" />
+        <param name="period" value="1.88" />
+    </node>
+
+<!-- Sun to Jupiter -->
+    <node pkg="psr_parte11" type="Solar_System.py" name="sun_to_jupiter" output="screen">
+        <remap from="parent" to="Sun"/>
+        <remap from="child" to="Jupiter"/>
+        <param name="distance_to_parent" value="5.2" />
+        <param name="period" value="11.9" />
+    </node>
+
+<!-- Sun to Saturn -->
+    <node pkg="psr_parte11" type="Solar_System.py" name="sun_to_saturn" output="screen">
+        <remap from="parent" to="Sun"/>
+        <remap from="child" to="Saturn"/>
+        <param name="distance_to_parent" value="9.58" />
+        <param name="period" value="29.4" />
+    </node>
+
+<!-- Sun to Uranus -->
+    <node pkg="psr_parte11" type="Solar_System.py" name="sun_to_uranus" output="screen">
+        <remap from="parent" to="Sun"/>
+        <remap from="child" to="Uranus"/>
+        <param name="distance_to_parent" value="19.2" />
+        <param name="period" value="83.7" />
+    </node>
+
+<!-- Sun to Neptune -->
+    <node pkg="psr_parte11" type="Solar_System.py" name="sun_to_neptune" output="screen">
+        <remap from="parent" to="Sun"/>
+        <remap from="child" to="Neptune"/>
+        <param name="distance_to_parent" value="30.05" />
+        <param name="period" value="163.7" />
+    </node>
+
+<!-- Sun to Pluto -->
+    <node pkg="psr_parte11" type="Solar_System.py" name="sun_to_pluto" output="screen">
+        <remap from="parent" to="Sun"/>
+        <remap from="child" to="Pluto"/>
+        <param name="distance_to_parent" value="39.48" />
+        <param name="period" value="247.9" />
+    </node>
+
+</launch>
